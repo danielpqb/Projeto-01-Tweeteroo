@@ -32,19 +32,15 @@ app.post("/sign-up", (req, res) => {
 //Post Tweet
 app.post("/tweets", (req, res) => {
   const tweet = req.body;
-  tweets.push(tweet);
-  res.send("Tweet postado com sucesso.");
+  const avatar = users.find((user) => user.username === tweet.username).avatar;
+
+  tweets.push({ ...tweet, avatar });
+  res.status(201).send("Tweet postado com sucesso.");
 });
 
 //Get Tweets
 app.get("/tweets", (req, res) => {
-  const newTweets = tweets.slice(-10).map((tweet) => {
-    const avatar = users.find(
-      (user) => user.username === tweet.username
-    ).avatar;
-    return { ...tweet, avatar };
-  });
-  res.send(newTweets);
+  res.status(201).send(tweets.slice(-10));
 });
 
 app.listen(5000, () => {
