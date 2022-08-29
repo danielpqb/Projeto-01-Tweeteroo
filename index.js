@@ -33,8 +33,9 @@ app.post("/sign-up", (req, res) => {
 app.post("/tweets", (req, res) => {
   const tweet = req.body;
   const avatar = users.find((user) => user.username === tweet.username).avatar;
+  const id = tweets.length + 1;
 
-  tweets.push({ ...tweet, avatar });
+  tweets.push({ id, ...tweet, avatar });
   res.status(201).send("Tweet postado com sucesso.");
 });
 
