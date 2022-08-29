@@ -20,6 +20,11 @@ app.post("/sign-up", (req, res) => {
     return;
   }
 
+  if (!avatar.startsWith("http")) {
+    res.status(400).send("URL inválida para avatar.");
+    return;
+  }
+
   users.push(user);
   res.status(201).send("Usuário cadastrado com sucesso.");
 });
